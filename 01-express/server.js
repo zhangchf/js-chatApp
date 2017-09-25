@@ -11,23 +11,7 @@ app.set("views", "./views"); // this is unnecessary when you use the direct view
 
 app.use(express.static(__dirname + "/public"));
 
-app.use((request, response, next) => {
-    console.log("In middleware 1");
-    // response.write("HEADER\n");
-    next();
-    console.log("Out of middleware 1");
-});
-
-
-app.use((request, response, next) => {
-    console.log("In middleware 2");
-    // response.write("Header 2\n");
-    next();
-    console.log("Out of middleware 2");
-});
-
 app.get("/", (request, response) => {
-    console.log("In handler");
     response.end("Hello World!");
 });
 
@@ -37,6 +21,14 @@ app.get("/home", (request, response) => {
 
 const server = http.Server(app);
 const io = socketIo(server);
+
+io.on("connection", socket => {
+    console.log("Socket connected");
+    socket.on("chat:add", data => {
+        console.log(data);
+        io.emit("chat:added", data);
+    });
+});
 
 const port = 3000;
 server.listen(port, () => {
