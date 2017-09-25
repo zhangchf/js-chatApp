@@ -2,6 +2,7 @@
 
 var http = require("http");
 var express = require("express");
+var socketIo = require("socket.io");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.get("/home", (request, response) => {
 });
 
 const server = http.Server(app);
+const io = socketIo(server);
 
 const port = 3000;
 server.listen(port, () => {
