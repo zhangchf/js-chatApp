@@ -9,9 +9,9 @@
     "parserOptions": {
         "sourceType": "module"
     },
-    "ecmaFeatures": {
-        "templateStrings": true
-    },
+    // "ecmaFeatures": {
+    //     "templateStrings": true
+    // },
     "rules": {
         "indent": [
             "error",
