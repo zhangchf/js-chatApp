@@ -1,3 +1,7 @@
+
+// include source map support
+import "source-map-support/register";
+
 import {blegh} from "shared/test";
 // import _ from "lodash";
 
