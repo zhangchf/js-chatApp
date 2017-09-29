@@ -17,6 +17,10 @@ function ignoreNodeModules(context, request, callback) {
 }
 
 function createConfig(isDebug) {
+    console.log("isDebug:" + isDebug);
+    if (isDebug == undefined) {
+        isDebug = true;
+    }
     // --------------------
     // WEBPACK CONFIG
     const plugins = [];
@@ -50,4 +54,5 @@ function createConfig(isDebug) {
     // --------------------
 }
 
-module.exports = createConfig(true);
+module.exports = createConfig;
+
