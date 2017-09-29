@@ -29,6 +29,8 @@
     "webpack": "^3.6.0"
   },
   "dependencies": {
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "source-map-support": "^0.4.18"
   }
 }
