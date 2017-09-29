@@ -16,6 +16,8 @@ gulp.task("clean", gulp.parallel("clean:server", "clean:client"));
 gulp.task("dev:server", gulp.series("clean:server", devServerBuild));
 gulp.task("prod:server", gulp.series("clean:server", prodServerBuild));
 
+gulp.task("dev", gulp.series("clean", devServerBuild, gulp.parallel(devServerWatch, devServerReload)));
+
 
 // --------------
 // Private Server Tasks
@@ -26,6 +28,23 @@ function devServerBuild(callback) {
     devServerWebpack.run((error, stats) => {
         outputWebpack("Dev:Server", error, stats);
         callback();
+    });
+}
+
+function devServerWatch() {
+    devServerWebpack.watch({}, (error, stats) => {
+        outputWebpack("Dev: Server", error, stats);
+    });
+}
+
+function devServerReload() {
+    return $.nodemon({
+        script: "./build/server.js",
+        watch: "./build",
+        env: {
+            "NODE_ENV": "development",
+            "USE_WEBPACK": "true"
+        }
     });
 }
 
