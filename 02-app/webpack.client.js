@@ -31,6 +31,10 @@ function createConfig(isDebug) {
             fallback: "style-loader",
             use: ["css-loader", "sass-loader"]
         });    
+    } else {
+        plugins.push(new webpack.HotModuleReplacementPlugin());
+        // This javascript will enable hot module replacement.
+        appEntry.splice(0, 0, "webpack-hot-middleware/client");
     }
 
     // ----------------

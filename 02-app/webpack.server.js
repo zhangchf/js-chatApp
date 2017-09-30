@@ -2,6 +2,7 @@ var path = require("path");
 var fs = require("fs");
 var webpack = require("webpack");
 
+// For server side.Don't compile node_modules into the compiled server.js code.
 const nodeModules = fs.readdirSync("./node_modules").filter(d => d != ".bin");
 function ignoreNodeModules(context, request, callback) {
     if (request[0] == ".") {
