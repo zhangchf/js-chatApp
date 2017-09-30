@@ -3,15 +3,24 @@ var webpack = require("webpack");
 
 const dirname = path.resolve("./");
 
+// These vendor modules will be compiled into a separate js file.
 const vendorModules = [ "jquery", "lodash"];
 
 function createConfig(isDebug) {
+    if (isDebug == undefined || isDebug == null) {
+        isDebug = true;
+    }
+
     const devTool = isDebug ? "eval-source-map" : "source-map";
     const plugins = [new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "vendor.js" })];
 
     const cssLoader = { test: /\.css$/, loader: "style-loader!css-loader" };
     const sassLoader = { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader" };
     const appEntry = ["./src/client/application.js"];
+
+    if (!isDebug) {
+        plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true}));
+    }
 
     // ----------------
     // WEBPACK CONFIG

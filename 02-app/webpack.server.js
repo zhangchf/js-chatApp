@@ -25,7 +25,7 @@ function createConfig(isDebug) {
     // WEBPACK CONFIG
     const plugins = [];
     if (!isDebug) {
-        plugins.push(new webpack.optimize.UglifyJsPlugin());
+        plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true }));
     }
 
     return {
