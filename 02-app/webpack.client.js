@@ -1,5 +1,6 @@
 var path = require("path");
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const dirname = path.resolve("./");
 
@@ -20,6 +21,16 @@ function createConfig(isDebug) {
 
     if (!isDebug) {
         plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true}));
+        plugins.push(new ExtractTextPlugin("[name].css"));
+
+        cssLoader.loader = ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: "css-loader"
+        });
+        sassLoader.loader = ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "sass-loader"]
+        });    
     }
 
     // ----------------
@@ -44,7 +55,7 @@ function createConfig(isDebug) {
             loaders: [
                 { test: /\.js$/, loader: "babel-loader", exclude: /node_modeules/ },
                 { test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ },
-                { test: /\.(png|jpg|jpeg|gif|woff|ttf|eot|svg|woff2)/, loader: "url-loader?limit=512" },
+                { test: /\.(png|jpg|jpeg|gif|woff|ttf|eot|svg|woff2)$/, loader: "url-loader?limit=512" },
                 cssLoader,
                 sassLoader
             ]
