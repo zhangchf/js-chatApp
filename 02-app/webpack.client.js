@@ -5,7 +5,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 const dirname = path.resolve("./");
 
 // These vendor modules will be compiled into a separate js file.
-const vendorModules = [ "jquery", "lodash"];
+const vendorModules = [ "jquery", "lodash", "socket.io-client", "rxjs"];
 
 function createConfig(isDebug) {
     if (isDebug == undefined || isDebug == null) {
