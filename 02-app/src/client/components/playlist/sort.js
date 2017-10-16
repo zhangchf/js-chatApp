@@ -1,6 +1,6 @@
 import {ComponentBase} from "../../lib/component";
 
-export class PlaylistToolbarComponent extends ComponentBase {
+export class PlaylistSortComponent extends ComponentBase {
     constructor() {
         super();
     }
