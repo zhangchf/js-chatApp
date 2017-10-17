@@ -6,4 +6,4 @@ import {UsersStore} from "./stores/users";
 export const socket = io({ autoConnect: false});
 export const server = new ObservableSocket(socket);
 
-export const usersStores = new UsersStore(server);
+export const usersStore = new UsersStore(server);

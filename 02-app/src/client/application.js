@@ -28,6 +28,6 @@ require("./components/playlist/playlist");
 // Bootstrap
 services.socket.connect();
 
-services.usersStores.state$.subscribe(state => {
+services.usersStore.state$.subscribe(state => {
     console.log(state);
 });

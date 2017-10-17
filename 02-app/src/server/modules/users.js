@@ -30,6 +30,7 @@ export class UsersModule extends ModuleBase {
             const username = `New user ${index}`;
             const user = {name: username, color: this.getColorForUsername(username)};
             client.emit("users:added", user);
+            index++;
         }, 2000);
 
         client.onActions({

@@ -15,13 +15,13 @@ export class UsersStore {
         this.state$ = events$
             .scan(({state}, op) => op(state), {state: defaultStore})
             .publishReplay(1);
-        
-        this.state$.connect();
-
-        // Bootstrap
+            
         this._server.on("connect", () => {
             this._server.emit("users:list");
         });
+
+        // Bootstrap
+        this.state$.connect();
     }
 }
 
